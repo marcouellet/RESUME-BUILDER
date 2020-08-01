@@ -10,7 +10,7 @@ export default function HeaderNavbar() {
             <section className="container">
                 <Link href="/">
                     <a>
-                        <img src="/images/logo1.png" alt="wtfresume logo (resume builder)" className={styles.logo} />
+                        <img src="/images/logo2.png" alt="wtfresume logo (resume builder)" className={styles.logo} />
                     </a>
                 </Link>
 

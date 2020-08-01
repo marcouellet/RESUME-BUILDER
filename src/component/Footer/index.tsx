@@ -10,7 +10,7 @@ export default function Footer() {
                     <div className="col-md-4">
                         <Link href="/">
                             <a>
-                                <img src="/images/logo1.png" alt="wtfresume logo (resume builder)" className={styles.logo} />
+                                <img src="/images/logo2.png" alt="wtfresume logo (resume builder)" className={styles.logo} />
                             </a>
                         </Link>
                     </div>
@@ -42,8 +42,6 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-
-            <div className={styles.footerCopyright}>wtfresume</div>
         </footer>
     );
 }
