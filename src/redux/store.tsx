@@ -1,24 +1,38 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import rootReducer from './rootReducer';
 import thunk from 'redux-thunk';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-// export const appStore = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
-// // export const appStore = createStore(
-//     // rootReducer,
-//     applyMiddleware(thunk)
-// ))
+export interface AppStore {
+    userData: {
+        [key: string]: string;
+    };
+    workExperience: [
+        {
+            [key: string]: string;
+        }
+    ];
 
-// export const appStore = (initialState) => {
-//     return createStore(
-//         rootReducer,
-//         initialState,
-//         composeWithDevTools(applyMiddleware(thunk))
-//     );
-// };
+    education: [
+        {
+            [key: string]: string;
+        }
+    ];
+    skills: [
+        {
+            [key: string]: string;
+        }
+    ];
+    theme: {
+        color: string;
+        fontFamily: string;
+    };
+    itemStatus: {
+        [key: string]: boolean;
+    };
+}
 
 const persistConfig = {
     key: 'primary',

@@ -1,4 +1,4 @@
-export const actionTypes = {
+const ActionTypes = {
     UPDATE_USER_DATA: 'UPDATE_USER_DATA',
     UPDATE_THEME: 'UPDATE_THEME',
     ADD_NEW_WORK_EXPERIENCE: 'ADD_NEW_WORK_EXPERIENCE',
@@ -18,3 +18,5 @@ export const actionTypes = {
     ADD_DELETED_WORK_SKILL_ITEM: 'ADD_DELETED_WORK_SKILL_ITEM',
     UPDATE_ITEM_STATUS: 'UPDATE_ITEM_STATUS',
 };
+
+export default ActionTypes;

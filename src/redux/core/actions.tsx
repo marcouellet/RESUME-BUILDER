@@ -1,35 +1,33 @@
-import { actionTypes } from './actionTypes';
-import { AppAPI } from '../../lib';
+import ActionTypes from './actionTypes';
 import Util from '../../lib/Util';
 import AppConfig from '../../constant/config';
 import ApiConst from '../../constant/api';
-
 import { appStore } from '../store';
 
-export const updateUserData = (data) => {
+export const updateUserData = (data: any) => {
     return {
-        type: actionTypes.UPDATE_USER_DATA,
+        type: ActionTypes.UPDATE_USER_DATA,
         payload: data,
     };
 };
 
-export const updateTheme = (data) => {
+export const updateTheme = (data: any) => {
     return {
-        type: actionTypes.UPDATE_THEME,
+        type: ActionTypes.UPDATE_THEME,
         payload: data,
     };
 };
 
-export const updateItemStatus = (data) => {
+export const updateItemStatus = (data: any) => {
     return {
-        type: actionTypes.UPDATE_ITEM_STATUS,
+        type: ActionTypes.UPDATE_ITEM_STATUS,
         payload: data,
     };
 };
 
-export const updateWorkExperience = (data) => {
+export const updateWorkExperience = (data: any) => {
     return {
-        type: actionTypes.UPDATE_WORK_EXPERIENCE,
+        type: ActionTypes.UPDATE_WORK_EXPERIENCE,
         payload: data,
     };
 };
@@ -46,29 +44,29 @@ export const addNewWorkExperience = () => {
     };
 
     return {
-        type: actionTypes.ADD_NEW_WORK_EXPERIENCE,
+        type: ActionTypes.ADD_NEW_WORK_EXPERIENCE,
         payload: data,
     };
 };
 
-export const updateWorkExperienceData = (id, data) => {
+export const updateWorkExperienceData = (id: string, data: any) => {
     return {
-        type: actionTypes.UPDATE_WORK_EXPERIENCE_DATA,
+        type: ActionTypes.UPDATE_WORK_EXPERIENCE_DATA,
         payloadId: id,
         payload: data,
     };
 };
 
-export const deleteWorkExperienceData = (id) => {
+export const deleteWorkExperienceData = (id: string) => {
     return {
-        type: actionTypes.DELETE_WORK_EXPERIENCE_DATA,
+        type: ActionTypes.DELETE_WORK_EXPERIENCE_DATA,
         payload: id,
     };
 };
 
-export const addDeletedWorkExperienceItem = (data) => {
+export const addDeletedWorkExperienceItem = (data: any) => {
     return {
-        type: actionTypes.ADD_DELETED_WORK_EXPERIENCE_ITEM,
+        type: ActionTypes.ADD_DELETED_WORK_EXPERIENCE_ITEM,
         payload: data,
     };
 };
@@ -82,36 +80,36 @@ export const addEducation = () => {
     };
 
     return {
-        type: actionTypes.ADD_NEW_EDUCATION,
+        type: ActionTypes.ADD_NEW_EDUCATION,
         payload: data,
     };
 };
 
-export const updateEducation = (data) => {
+export const updateEducation = (data: any) => {
     return {
-        type: actionTypes.UPDATE_EDUCATION,
+        type: ActionTypes.UPDATE_EDUCATION,
         payload: data,
     };
 };
 
-export const updateEducationData = (id, data) => {
+export const updateEducationData = (id: string, data: any) => {
     return {
-        type: actionTypes.UPDATE_EDUCATION_DATA,
+        type: ActionTypes.UPDATE_EDUCATION_DATA,
         payloadId: id,
         payload: data,
     };
 };
 
-export const deleteEducationData = (id) => {
+export const deleteEducationData = (id: string) => {
     return {
-        type: actionTypes.DELETE_EDUCATION_DATA,
+        type: ActionTypes.DELETE_EDUCATION_DATA,
         payload: id,
     };
 };
 
-export const addDeletedEducationItem = (data) => {
+export const addDeletedEducationItem = (data: any) => {
     return {
-        type: actionTypes.ADD_DELETED_WORK_EDUCATION_ITEM,
+        type: ActionTypes.ADD_DELETED_WORK_EDUCATION_ITEM,
         payload: data,
     };
 };
@@ -124,42 +122,42 @@ export const addSkill = () => {
     };
 
     return {
-        type: actionTypes.ADD_NEW_SKILL,
+        type: ActionTypes.ADD_NEW_SKILL,
         payload: data,
     };
 };
 
-export const updateSkill = (data) => {
+export const updateSkill = (data: any) => {
     return {
-        type: actionTypes.UPDATE_SKILL,
+        type: ActionTypes.UPDATE_SKILL,
         payload: data,
     };
 };
 
-export const updateSkillData = (id, data) => {
+export const updateSkillData = (id: string, data: any) => {
     return {
-        type: actionTypes.UPDATE_SKILL_DATA,
+        type: ActionTypes.UPDATE_SKILL_DATA,
         payloadId: id,
         payload: data,
     };
 };
 
-export const deleteSkillData = (id) => {
+export const deleteSkillData = (id: string) => {
     return {
-        type: actionTypes.DELETE_SKILL_DATA,
+        type: ActionTypes.DELETE_SKILL_DATA,
         payload: id,
     };
 };
 
-export const addDeletedSkillItem = (data) => {
+export const addDeletedSkillItem = (data: any) => {
     return {
-        type: actionTypes.ADD_DELETED_WORK_SKILL_ITEM,
+        type: ActionTypes.ADD_DELETED_WORK_SKILL_ITEM,
         payload: data,
     };
 };
 
 export const exportUserData = () => {
-    return (dispatch, getState) => {
+    return function (_: any, getState: () => any) {
         const userData = getState().userData;
         const workExperience = getState().workExperience;
         const education = getState().education;
@@ -168,20 +166,13 @@ export const exportUserData = () => {
         const itemStatus = getState().itemStatus;
 
         let data = [];
-        data = {
-            userData,
-            workExperience,
-            education,
-            skills,
-            theme,
-            itemStatus,
-        };
+        data = [userData, workExperience, education, skills, theme, itemStatus];
 
         return data;
     };
 };
 
-export const importUserData = (data) => {
+export const importUserData = (data: any) => {
     // const obj = JSON.parse(data)
     const obj = data;
 
@@ -193,7 +184,7 @@ export const importUserData = (data) => {
     appStore.dispatch(updateItemStatus(obj.itemStatus));
 };
 
-export const uploadImageAction = (image) => {
+export const uploadImageAction = (image: any) => {
     return () =>
         new Promise((resolve, reject) => {
             const formData = new FormData();

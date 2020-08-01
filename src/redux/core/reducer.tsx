@@ -1,6 +1,8 @@
-import { actionTypes } from './actionTypes';
+import ActionTypes from './actionTypes';
+import { AppStore } from '../store';
+import { Reducer } from 'redux';
 
-const initialState = {
+const initialState: AppStore = {
     userData: {
         name: '',
         address: '',
@@ -32,9 +34,9 @@ const initialState = {
     },
 };
 
-export default function core(state = initialState, action) {
+const core: Reducer = (state: AppStore = initialState, action: any) => {
     switch (action.type) {
-        case actionTypes.UPDATE_USER_DATA:
+        case ActionTypes.UPDATE_USER_DATA:
             if (!action.payload) return state;
 
             return {
@@ -45,7 +47,7 @@ export default function core(state = initialState, action) {
                 },
             };
 
-        case actionTypes.UPDATE_THEME:
+        case ActionTypes.UPDATE_THEME:
             if (!action.payload) return state;
 
             return {
@@ -55,7 +57,7 @@ export default function core(state = initialState, action) {
                     ...action.payload,
                 },
             };
-        case actionTypes.UPDATE_ITEM_STATUS:
+        case ActionTypes.UPDATE_ITEM_STATUS:
             if (!action.payload) return state;
 
             return {
@@ -66,7 +68,7 @@ export default function core(state = initialState, action) {
                 },
             };
 
-        case actionTypes.ADD_NEW_WORK_EXPERIENCE:
+        case ActionTypes.ADD_NEW_WORK_EXPERIENCE:
             if (!action.payload) return state;
 
             return {
@@ -79,14 +81,14 @@ export default function core(state = initialState, action) {
                 ],
             };
 
-        case actionTypes.UPDATE_WORK_EXPERIENCE:
+        case ActionTypes.UPDATE_WORK_EXPERIENCE:
             if (!action.payload) return state;
 
             return Object.assign({}, state, {
                 workExperience: action.payload,
             });
 
-        case actionTypes.UPDATE_WORK_EXPERIENCE_DATA:
+        case ActionTypes.UPDATE_WORK_EXPERIENCE_DATA:
             if (!action.payload || !action.payloadId) return state;
 
             const newWorkExperience = JSON.parse(JSON.stringify(state.workExperience));
@@ -105,7 +107,7 @@ export default function core(state = initialState, action) {
                 workExperience: [...newWorkExperience],
             };
 
-        case actionTypes.DELETE_WORK_EXPERIENCE_DATA:
+        case ActionTypes.DELETE_WORK_EXPERIENCE_DATA:
             if (!action.payload) return state;
 
             let newWkE = JSON.parse(JSON.stringify(state.workExperience));
@@ -115,7 +117,7 @@ export default function core(state = initialState, action) {
                 workExperience: [...newWkE],
             };
 
-        case actionTypes.ADD_DELETED_WORK_EXPERIENCE_ITEM:
+        case ActionTypes.ADD_DELETED_WORK_EXPERIENCE_ITEM:
             if (!action.payload) return state;
 
             return {
@@ -123,7 +125,7 @@ export default function core(state = initialState, action) {
                 workExperience: [...state.workExperience, ...action.payload],
             };
 
-        case actionTypes.ADD_NEW_EDUCATION:
+        case ActionTypes.ADD_NEW_EDUCATION:
             if (!action.payload) return state;
 
             return {
@@ -136,14 +138,14 @@ export default function core(state = initialState, action) {
                 ],
             };
 
-        case actionTypes.UPDATE_EDUCATION:
+        case ActionTypes.UPDATE_EDUCATION:
             if (!action.payload) return state;
 
             return Object.assign({}, state, {
                 education: action.payload,
             });
 
-        case actionTypes.UPDATE_EDUCATION_DATA:
+        case ActionTypes.UPDATE_EDUCATION_DATA:
             if (!action.payload || !action.payloadId) return state;
 
             const neweducation = JSON.parse(JSON.stringify(state.education));
@@ -162,7 +164,7 @@ export default function core(state = initialState, action) {
                 education: [...neweducation],
             };
 
-        case actionTypes.DELETE_EDUCATION_DATA:
+        case ActionTypes.DELETE_EDUCATION_DATA:
             if (!action.payload) return state;
 
             let newE = JSON.parse(JSON.stringify(state.education));
@@ -172,7 +174,7 @@ export default function core(state = initialState, action) {
                 education: [...newE],
             };
 
-        case actionTypes.ADD_DELETED_WORK_EDUCATION_ITEM:
+        case ActionTypes.ADD_DELETED_WORK_EDUCATION_ITEM:
             if (!action.payload) return state;
 
             return {
@@ -180,7 +182,7 @@ export default function core(state = initialState, action) {
                 education: [...state.education, ...action.payload],
             };
 
-        case actionTypes.ADD_NEW_SKILL:
+        case ActionTypes.ADD_NEW_SKILL:
             if (!action.payload) return state;
 
             return {
@@ -193,14 +195,14 @@ export default function core(state = initialState, action) {
                 ],
             };
 
-        case actionTypes.UPDATE_SKILL:
+        case ActionTypes.UPDATE_SKILL:
             if (!action.payload) return state;
 
             return Object.assign({}, state, {
                 skills: action.payload,
             });
 
-        case actionTypes.UPDATE_SKILL_DATA:
+        case ActionTypes.UPDATE_SKILL_DATA:
             if (!action.payload || !action.payloadId) return state;
 
             const newSkills = JSON.parse(JSON.stringify(state.skills));
@@ -219,7 +221,7 @@ export default function core(state = initialState, action) {
                 skills: [...newSkills],
             };
 
-        case actionTypes.DELETE_SKILL_DATA:
+        case ActionTypes.DELETE_SKILL_DATA:
             if (!action.payload) return state;
 
             let newS = JSON.parse(JSON.stringify(state.skills));
@@ -229,7 +231,7 @@ export default function core(state = initialState, action) {
                 skills: [...newS],
             };
 
-        case actionTypes.ADD_DELETED_WORK_SKILL_ITEM:
+        case ActionTypes.ADD_DELETED_WORK_SKILL_ITEM:
             if (!action.payload) return state;
 
             return {
@@ -240,4 +242,6 @@ export default function core(state = initialState, action) {
         default:
             return { ...state };
     }
-}
+};
+
+export default core;
