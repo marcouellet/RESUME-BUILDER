@@ -40,11 +40,12 @@ export default (App) => {
 
         constructor(props) {
             super(props);
+            this.initialReduxState = props.initialReduxState;
             this.reduxStore = getOrCreateStore(props.initialReduxState);
         }
 
         render() {
-            return <App {...this.props} reduxStore={this.reduxStore} />;
+            return <App {...this.props} reduxStore={this.reduxStore} initialReduxState={this.initialReduxState} />;
         }
     };
 };

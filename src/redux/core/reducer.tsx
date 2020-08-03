@@ -34,7 +34,7 @@ const initialState: AppStore = {
     },
 };
 
-const core: Reducer = (state: AppStore = initialState, action: any) => {
+const core: Reducer<AppStore> = (state = initialState, action: any) => {
     switch (action.type) {
         case ActionTypes.UPDATE_USER_DATA:
             if (!action.payload) return state;

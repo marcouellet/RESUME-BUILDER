@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import download from 'downloadjs';
 import Head from 'next/head';
 import styles from './style.module.scss';
@@ -11,7 +11,6 @@ import Router from 'next/router';
 
 import { importUserData, exportUserData } from '../../src/redux/core/actions';
 import { Loading } from '@component';
-import { appStore } from '../../src/redux/store';
 
 interface TProps {
     theme: {
@@ -25,24 +24,15 @@ interface TProps {
         [key: string]: string;
     };
 }
-interface TState {
-    exportStatus: any;
-    gifGenerateStatus: boolean;
-    // exportStatus: Boolean | string | null
-}
 
-class Home extends React.Component<TProps, TState> {
-    constructor(props: TProps) {
-        super(props);
-        this.state = {
-            exportStatus: false,
-            gifGenerateStatus: false,
-        };
-    }
+const Home = (props: TProps) => {
+    const [exportStatus, setExportStatus] = useState<any>(false);
+    const [gifGenerateStatus, setGifGenerateStatus] = useState(false);
+    const dispatch = useDispatch();
 
-    componentDidMount() {
+    useEffect(() => {
         const exportStatus = Util.getQueryString(window.location, 'export');
-        this.setState({ exportStatus });
+        setExportStatus(exportStatus);
 
         const data = Util.getQueryString(window.location, 'data');
         if (exportStatus === 'true' && data) {
@@ -52,14 +42,13 @@ class Home extends React.Component<TProps, TState> {
                     importUserData(JSON.parse(JSON.stringify(res)));
                 });
         }
-    }
+    }, []);
 
-    _downloadPDFBtnPress = async () => {
-        const { userData } = this.props;
-        const data = appStore.dispatch(exportUserData());
-        const fileName = `CV-${userData.name}.pdf`;
+    const _downloadPDFBtnPress = async () => {
+        const data = dispatch(exportUserData());
+        const fileName = `CV-${props.userData.name}.pdf`;
 
-        this.setState({ gifGenerateStatus: true });
+        setGifGenerateStatus(true);
 
         const req = {
             method: 'POST',
@@ -72,54 +61,42 @@ class Home extends React.Component<TProps, TState> {
 
         const res = await fetch(`${APIConfig.hostname}/download`, req);
         const blob = await res.blob();
-        this.setState({ gifGenerateStatus: false });
+        setExportStatus(false);
         download(blob, fileName);
     };
 
-    render() {
-        return (
-            <>
-                <Head>
-                    <title>preview | wtfresume</title>
-                </Head>
-                <div style={{ fontFamily: this.props.theme.fontFamily }}>
-                    {this.state.exportStatus !== 'true' && (
-                        <>
-                            <div className={styles.bgLayer} />
+    return (
+        <>
+            <Head>
+                <title>preview | wtfresume</title>
+            </Head>
+            <div style={{ fontFamily: props.theme.fontFamily }}>
+                {exportStatus !== 'true' && (
+                    <>
+                        <div className={styles.bgLayer} />
 
-                            <div className={styles.topNav}>
-                                <div className={styles.left}>
-                                    <i className="material-icons" onClick={() => Router.back()}>
-                                        keyboard_backspace
-                                    </i>
-                                </div>
-
-                                <div className={['verticalCenter', styles.right].join(' ')}>
-                                    <span onClick={this._downloadPDFBtnPress}>Download as PDF</span>
-                                </div>
+                        <div className={styles.topNav}>
+                            <div className={styles.left}>
+                                <i className="material-icons" onClick={() => Router.back()}>
+                                    keyboard_backspace
+                                </i>
                             </div>
-                        </>
-                    )}
 
-                    <div className={[styles.container, this.state.exportStatus !== 'true' && styles.previewContainer].join(' ')}>
-                        <One />
-                    </div>
+                            <div className={['verticalCenter', styles.right].join(' ')}>
+                                <span onClick={_downloadPDFBtnPress}>Download as PDF</span>
+                            </div>
+                        </div>
+                    </>
+                )}
 
-                    <Loading show={this.state.gifGenerateStatus} />
+                <div className={[styles.container, exportStatus !== 'true' && styles.previewContainer].join(' ')}>
+                    <One />
                 </div>
-            </>
-        );
-    }
-}
 
-const mapStateToProps = (store: any) => ({
-    theme: store.theme,
-    itemStatus: store.itemStatus,
-    userData: store.userData,
-});
+                <Loading show={gifGenerateStatus} />
+            </div>
+        </>
+    );
+};
 
-const mapDispatchToProps = () => ({
-    importUserData,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
