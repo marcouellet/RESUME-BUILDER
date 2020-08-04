@@ -4,7 +4,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import Link from 'next/link';
 import styles from './style.module.scss';
 
-export default function HeaderNavbar() {
+const HeaderNavbar = () => {
     return (
         <Navbar expand="sm" className={styles.nav}>
             <section className="container">
@@ -38,4 +38,6 @@ export default function HeaderNavbar() {
             </section>
         </Navbar>
     );
-}
+};
+
+export default HeaderNavbar;

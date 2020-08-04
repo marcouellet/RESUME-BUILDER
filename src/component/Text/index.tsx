@@ -26,7 +26,7 @@ const defaultProps: TProps = {
     tag: 'p',
 };
 
-function Text(props: TProps) {
+const Text = (props: TProps) => {
     const [editable, setEditable] = useState(true);
 
     useEffect(() => {
@@ -84,7 +84,7 @@ function Text(props: TProps) {
         //     {this.props.value}
         // </p>
     );
-}
+};
 
 Text.defaultProps = defaultProps;
 

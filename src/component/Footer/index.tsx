@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import styles from './footer.module.scss';
 
-export default function Footer() {
+const Footer = () => {
     return (
         <footer className={styles.footer}>
             <div className="container">
@@ -44,4 +44,6 @@ export default function Footer() {
             </div>
         </footer>
     );
-}
+};
+
+export default Footer;

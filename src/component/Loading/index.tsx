@@ -6,7 +6,7 @@ interface TProps {
     show: boolean;
 }
 
-export default function Loading(props: TProps) {
+const Loading = (props: TProps) => {
     return props.show ? (
         <div className={styles.container}>
             <div className={['verticalCenter', styles.gif].join(' ')}>
@@ -16,4 +16,6 @@ export default function Loading(props: TProps) {
     ) : (
         <div />
     );
-}
+};
+
+export default Loading;
