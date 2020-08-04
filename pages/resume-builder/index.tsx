@@ -1,58 +1,33 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styles from './style.module.scss';
 import { TopNavbar, Footer } from '@component';
 import { One } from '@template';
 import Head from 'next/head';
+import { AppStore } from '../../src/redux/store';
 
-interface TProps {
-    theme: {
-        color: string;
-        fontFamily: string;
-    };
-    itemStatus: {
-        [key: string]: boolean;
-    };
-    userData: {
-        [key: string]: string;
-    };
-}
+const Home = () => {
+    const state = useSelector<AppStore>((state) => state) as AppStore;
 
-class Home extends React.Component<TProps> {
-    constructor(props: TProps) {
-        super(props);
-        this.state = {};
-    }
-
-    render() {
-        return (
-            <>
-                <Head>
-                    <title>resume builder | wtfresume</title>
-                </Head>
-                <div style={{ fontFamily: this.props.theme.fontFamily }}>
-                    <div className={styles.loading} style={{ background: this.props.theme.color }}>
-                        <div className={styles.loading_gradient}></div>
-                    </div>
-
-                    <TopNavbar itemStatus={this.props.itemStatus} theme={this.props.theme} userData={this.props.userData} />
-
-                    <div className={styles.container}>
-                        <One />
-                    </div>
+    return (
+        <>
+            <Head>
+                <title>resume builder | wtfresume</title>
+            </Head>
+            <div style={{ fontFamily: state.theme.fontFamily }}>
+                <div className={styles.loading} style={{ background: state.theme.color }}>
+                    <div className={styles.loading_gradient}></div>
                 </div>
-                <Footer />
-            </>
-        );
-    }
-}
 
-const mapStateToProps = (store: any) => ({
-    theme: store.theme,
-    userData: store.userData,
-    itemStatus: store.itemStatus,
-});
+                <TopNavbar itemStatus={state.itemStatus} theme={state.theme} userData={state.userData} />
 
-const mapDispatchToProps = () => ({});
+                <div className={styles.container}>
+                    <One />
+                </div>
+            </div>
+            <Footer />
+        </>
+    );
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

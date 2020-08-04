@@ -6,7 +6,7 @@ import { HeaderNavbar, Footer } from '@component';
 
 import styles from './style.module.scss';
 
-export default function Custom404() {
+const Custom404 = () => {
     return (
         <div className={styles.errPage}>
             <Head>
@@ -26,4 +26,6 @@ export default function Custom404() {
             <Footer />
         </div>
     );
-}
+};
+
+export default Custom404;

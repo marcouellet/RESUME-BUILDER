@@ -5,7 +5,7 @@ import { HeaderNavbar, Footer } from '@component';
 
 import styles from './style.module.scss';
 
-export default function Home() {
+const Home = () => {
     return (
         <div className={styles.homePage}>
             <HeaderNavbar />
@@ -26,4 +26,6 @@ export default function Home() {
             <Footer />
         </div>
     );
-}
+};
+
+export default Home;

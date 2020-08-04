@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import download from 'downloadjs';
 import Head from 'next/head';
 import styles from './style.module.scss';
@@ -8,24 +8,13 @@ import { One } from '@template';
 import { Util } from '@lib';
 import { APIConfig } from '@constant';
 import Router from 'next/router';
+import { AppStore } from '../../src/redux/store';
 
 import { importUserData, exportUserData } from '../../src/redux/core/actions';
 import { Loading } from '@component';
 
-interface TProps {
-    theme: {
-        color: string;
-        fontFamily: string;
-    };
-    itemStatus: {
-        [key: string]: boolean;
-    };
-    userData: {
-        [key: string]: string;
-    };
-}
-
-const Home = (props: TProps) => {
+const Home = () => {
+    const state = useSelector<AppStore>((state) => state) as AppStore;
     const [exportStatus, setExportStatus] = useState<any>(false);
     const [gifGenerateStatus, setGifGenerateStatus] = useState(false);
     const dispatch = useDispatch();
@@ -46,7 +35,7 @@ const Home = (props: TProps) => {
 
     const _downloadPDFBtnPress = async () => {
         const data = dispatch(exportUserData());
-        const fileName = `CV-${props.userData.name}.pdf`;
+        const fileName = `CV-${state.userData.name}.pdf`;
 
         setGifGenerateStatus(true);
 
@@ -70,7 +59,7 @@ const Home = (props: TProps) => {
             <Head>
                 <title>preview | wtfresume</title>
             </Head>
-            <div style={{ fontFamily: props.theme.fontFamily }}>
+            <div style={{ fontFamily: state.theme.fontFamily }}>
                 {exportStatus !== 'true' && (
                     <>
                         <div className={styles.bgLayer} />
