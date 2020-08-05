@@ -8,6 +8,7 @@ import { PersistPartial } from 'redux-persist/es/persistReducer';
 
 export type KeyValueObject = { [key: string]: string };
 export type KeyValueObjectArray = KeyValueObject[];
+export type KeyValueObjectArrayObject = { [key: string]: KeyValueObjectArray };
 
 export interface AppStore {
     userData: KeyValueObject;
