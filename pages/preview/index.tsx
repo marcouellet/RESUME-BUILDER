@@ -79,7 +79,7 @@ const Home = () => {
                 )}
 
                 <div className={[styles.container, exportStatus !== 'true' && styles.previewContainer].join(' ')}>
-                    <One />
+                    <One {...state} userData={state.userData as any} />
                 </div>
 
                 <Loading show={gifGenerateStatus} />
