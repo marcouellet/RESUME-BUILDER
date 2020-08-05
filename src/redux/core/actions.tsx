@@ -49,7 +49,7 @@ export const addNewWorkExperience = () => {
     };
 };
 
-export const updateWorkExperienceData = (id: number, data: any) => {
+export const updateWorkExperienceData = (id: string, data: any) => {
     return {
         type: ActionTypes.UPDATE_WORK_EXPERIENCE_DATA,
         payloadId: id,
@@ -57,7 +57,7 @@ export const updateWorkExperienceData = (id: number, data: any) => {
     };
 };
 
-export const deleteWorkExperienceData = (id: number) => {
+export const deleteWorkExperienceData = (id: string) => {
     return {
         type: ActionTypes.DELETE_WORK_EXPERIENCE_DATA,
         payload: id,
@@ -92,7 +92,7 @@ export const updateEducation = (data: any) => {
     };
 };
 
-export const updateEducationData = (id: number, data: any) => {
+export const updateEducationData = (id: string, data: any) => {
     return {
         type: ActionTypes.UPDATE_EDUCATION_DATA,
         payloadId: id,
@@ -100,7 +100,7 @@ export const updateEducationData = (id: number, data: any) => {
     };
 };
 
-export const deleteEducationData = (id: number) => {
+export const deleteEducationData = (id: string) => {
     return {
         type: ActionTypes.DELETE_EDUCATION_DATA,
         payload: id,
@@ -134,7 +134,7 @@ export const updateSkill = (data: any) => {
     };
 };
 
-export const updateSkillData = (id: number, data: any) => {
+export const updateSkillData = (id: string, data: any) => {
     return {
         type: ActionTypes.UPDATE_SKILL_DATA,
         payloadId: id,
@@ -142,7 +142,7 @@ export const updateSkillData = (id: number, data: any) => {
     };
 };
 
-export const deleteSkillData = (id: number) => {
+export const deleteSkillData = (id: string) => {
     return {
         type: ActionTypes.DELETE_SKILL_DATA,
         payload: id,

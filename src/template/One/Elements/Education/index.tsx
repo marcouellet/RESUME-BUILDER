@@ -3,36 +3,40 @@ import { useDispatch } from 'react-redux';
 
 import { Toast, Util } from '@lib';
 import { Text, Dnd } from '@component';
+import { KeyValueObject, KeyValueObjectArray } from '../../one';
 
 import { addEducation, updateEducation, deleteEducationData } from '../../../../redux/core/actions';
 
 import styles from './education.module.scss';
 
-function Education(props) {
+interface TProps {
+    data: KeyValueObjectArray;
+}
+
+const Education = (props: TProps): JSX.Element => {
     const dispatch = useDispatch();
 
-    const _updateEducation = (data) => {
+    const _updateEducation = (data: KeyValueObjectArray): void => {
         const storeReorder = Util.mapOrder(props.data, data, 'id');
         dispatch(updateEducation(storeReorder));
     };
 
-    const _addNewItem = () => {
+    const _addNewItem = (): void => {
         dispatch(addEducation());
     };
 
-    const _removeItem = (id, data) => {
+    const _removeItem = (id: string, data: KeyValueObjectArray): void => {
         Toast.showUndo(id, data, 'education', 'Education Item Removed');
         dispatch(deleteEducationData(id));
     };
 
-    const { data } = props;
     return (
         <Dnd
-            data={data}
+            data={props.data}
             reorder={(e) => _updateEducation(e)}
             additem={_addNewItem}
-            removeitem={(e) => _removeItem(e, data)}
-            renderItem={(item) => (
+            removeitem={(id: string) => _removeItem(id, props.data)}
+            renderItem={(item: KeyValueObject) => (
                 <div style={{ background: '#fff' }}>
                     <Text
                         value={item.title}
@@ -51,7 +55,7 @@ function Education(props) {
             )}
         />
     );
-}
+};
 
 /* Export Component =============================== */
 export default Education;

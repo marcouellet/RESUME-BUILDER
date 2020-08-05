@@ -11,7 +11,7 @@ type DivProps = JSX.IntrinsicElements['p'];
 
 interface TProps extends DivProps {
     statename: string;
-    stateid: number;
+    stateid: any;
     value: any;
     customclass: any;
     tag: any;

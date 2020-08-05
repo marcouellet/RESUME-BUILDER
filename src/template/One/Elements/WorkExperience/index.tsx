@@ -1,39 +1,40 @@
 import React from 'react';
-
+import { useDispatch } from 'react-redux';
 import { Toast, Util } from '@lib';
 import { Text, Dnd } from '@component';
-
-import { useDispatch } from 'react-redux';
-
 import { addNewWorkExperience, updateWorkExperience, deleteWorkExperienceData } from '../../../../redux/core/actions';
-
 import styles from './experience.module.scss';
+import { KeyValueObject, KeyValueObjectArray } from '../../one';
 
-function WorkExperience(props) {
+interface TProps {
+    data: KeyValueObjectArray;
+    color: string;
+}
+
+const WorkExperience = (props: TProps): JSX.Element => {
     const dispatch = useDispatch();
 
-    const _updateWorkExperience = (data) => {
+    const _updateWorkExperience = (data: KeyValueObjectArray): void => {
         const storeReorder = Util.mapOrder(props.data, data, 'id');
         dispatch(updateWorkExperience(storeReorder));
     };
 
-    const _addNewItem = () => {
+    const _addNewItem = (): void => {
         dispatch(addNewWorkExperience());
     };
 
-    const _removeItem = (id, data) => {
+    const _removeItem = (id: string, data: KeyValueObjectArray): void => {
         Toast.showUndo(id, data, 'workExperience', 'Work Item Removed');
         dispatch(deleteWorkExperienceData(id));
     };
 
-    const { data, color } = props;
     return (
         <Dnd
-            data={data}
+            data={props.data}
             reorder={(e) => _updateWorkExperience(e)}
             additem={_addNewItem}
-            removeitem={(e) => _removeItem(e, data)}
-            renderItem={(item) => (
+            removeitem={(id: string) => _removeItem(id, props.data)}
+            renderItem={(item: KeyValueObject) => (
                 <div className={styles.workBox}>
                     <div className={styles.leftWork}>
                         <Text
@@ -46,7 +47,7 @@ function WorkExperience(props) {
                         />
                     </div>
                     <div className={styles.RightWork}>
-                        <div className={styles.workDot} style={{ '--circle-color': color }} />
+                        <div className={styles.workDot} />
                         <Text
                             value={item.jobTitle}
                             statename="workExperience.jobTitle"
@@ -84,7 +85,7 @@ function WorkExperience(props) {
             )}
         />
     );
-}
+};
 
 /* Export Component =============================== */
 export default WorkExperience;
