@@ -1,11 +1,6 @@
 export type KeyValueObject = { [key: string]: string };
 export type KeyValueObjectArray = KeyValueObject[];
 
-export interface DndItem {
-    id: string;
-    content: string;
-}
-
 export interface TProps {
     theme: {
         color: string;

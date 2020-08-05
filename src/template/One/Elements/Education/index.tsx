@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-
 import { Toast, Util } from '@lib';
 import { Text, Dnd } from '@component';
 import { KeyValueObject, KeyValueObjectArray } from '../../one';
@@ -33,7 +32,7 @@ const Education = (props: TProps): JSX.Element => {
     return (
         <Dnd
             data={props.data}
-            reorder={(e) => _updateEducation(e)}
+            reorder={(data: KeyValueObjectArray) => _updateEducation(data)}
             additem={_addNewItem}
             removeitem={(id: string) => _removeItem(id, props.data)}
             renderItem={(item: KeyValueObject) => (

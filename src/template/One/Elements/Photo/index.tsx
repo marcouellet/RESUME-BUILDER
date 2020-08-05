@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
-
 import { Loading } from '@component';
-
 import { uploadImageAction, updateUserData } from '../../../../redux/core/actions';
-import { TProps } from './photo';
-
+import { KeyValueObject } from '../../one';
 import styles from './photo.module.scss';
 
-function Skills(props: TProps) {
+interface TProps {
+    userData: KeyValueObject;
+}
+
+const Photo = (props: TProps) => {
     const [modalStatus, setModalStatus] = useState(false);
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
@@ -76,7 +77,7 @@ function Skills(props: TProps) {
             <Loading show={loading} />
         </>
     );
-}
+};
 
 /* Export Component =============================== */
-export default Skills;
+export default Photo;

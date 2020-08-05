@@ -1,19 +1,18 @@
 import React from 'react';
-
 import { useDispatch } from 'react-redux';
-
 import { Toast, Util } from '@lib';
-
 import { Text, Dnd2Column } from '@component';
-
 import { addSkill, updateSkill, deleteSkillData } from '../../../../redux/core/actions';
+import { KeyValueObject, KeyValueObjectArray } from '../../one';
 
-// import styles from './skills.module.scss';
+interface TProps {
+    data: KeyValueObjectArray;
+}
 
-function Skills(props) {
+const Skills = (props: TProps) => {
     const dispatch = useDispatch();
 
-    const _updateSkill = (data) => {
+    const _updateSkill = (data: KeyValueObjectArray) => {
         const storeReorder = Util.mapOrder(props.data, data, 'id');
         dispatch(updateSkill(storeReorder));
     };
@@ -22,26 +21,25 @@ function Skills(props) {
         dispatch(addSkill());
     };
 
-    const _removeItem = (id, data) => {
+    const _removeItem = (id: string, data: KeyValueObjectArray) => {
         Toast.showUndo(id, data, 'skills', 'Skills Item Removed');
         dispatch(deleteSkillData(id));
     };
 
-    const { data } = props;
     return (
         <Dnd2Column
-            data={data}
-            reorder={(e) => _updateSkill(e)}
+            data={props.data}
+            reorder={(data: KeyValueObjectArray) => _updateSkill(data)}
             additem={_addNewItem}
-            removeitem={(e) => _removeItem(e, data)}
-            renderItem={(item) => (
+            removeitem={(id: string) => _removeItem(id, props.data)}
+            renderItem={(item: KeyValueObject) => (
                 <div style={{ background: '#fff' }}>
                     <Text value={item.title} statename="skills.title" stateid={item.id} placeholder="React Native" />
                 </div>
             )}
         />
     );
-}
+};
 
 /* Export Component =============================== */
 export default Skills;

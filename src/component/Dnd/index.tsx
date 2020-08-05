@@ -68,17 +68,6 @@ interface TProps {
 }
 
 const Dnd = (props: TProps) => {
-    /*     static getDerivedStateFromProps(props, state) {
-        // if (!equal(props.data.length, state.data.length)) {
-        if (!equal(props.data, state.data)) {
-            return {
-                data: props.data,
-            };
-        }
-        return true;
-     }*/
-    //const appStore = useSelector<AppStore>((state) => state) as AppStore;
-
     // a little function to help us with reordering the result
     const reorder = (list: KeyValueObjectArray, startIndex: number, endIndex: number): KeyValueObjectArray => {
         const result = Array.from(list);
