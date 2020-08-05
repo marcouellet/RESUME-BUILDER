@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Toast, Util } from '@lib';
 import { Text, Dnd } from '@component';
-import { KeyValueObject, KeyValueObjectArray } from '../../one';
+import { KeyValueObject, KeyValueObjectArray } from '../../../../redux/store';
 
 import { addEducation, updateEducation, deleteEducationData } from '../../../../redux/core/actions';
 

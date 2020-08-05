@@ -2,9 +2,8 @@ import React from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import equal from 'deep-equal';
 import { Tooltip } from 'react-tippy';
-
 import styles from './dnd.module.scss';
-import { KeyValueObject, KeyValueObjectArray } from '../../template/One/one';
+import { KeyValueObject, KeyValueObjectArray } from '../../redux/store';
 
 const getDragIconStyle = (isDragging: boolean, draggableStyle: any) => ({
     userSelect: 'none',

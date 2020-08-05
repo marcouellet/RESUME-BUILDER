@@ -4,7 +4,7 @@ import { Toast, Util } from '@lib';
 import { Text, Dnd } from '@component';
 import { addNewWorkExperience, updateWorkExperience, deleteWorkExperienceData } from '../../../../redux/core/actions';
 import styles from './experience.module.scss';
-import { KeyValueObject, KeyValueObjectArray } from '../../one';
+import { KeyValueObject, KeyValueObjectArray } from '../../../../redux/store';
 
 interface TProps {
     data: KeyValueObjectArray;

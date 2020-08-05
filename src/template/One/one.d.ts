@@ -1,5 +1,4 @@
-export type KeyValueObject = { [key: string]: string };
-export type KeyValueObjectArray = KeyValueObject[];
+import { KeyValueObjectArray } from '../../redux/store';
 
 export interface TProps {
     theme: {
@@ -22,5 +21,5 @@ export interface TProps {
     workExperience: KeyValueObjectArray;
     education: KeyValueObjectArray;
     skills: KeyValueObjectArray;
-    itemStatus: KeyValueObject;
+    itemStatus: { [key: string]: boolean };
 }

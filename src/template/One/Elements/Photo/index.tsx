@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
 import { Loading } from '@component';
 import { uploadImageAction, updateUserData } from '../../../../redux/core/actions';
-import { KeyValueObject } from '../../one';
+import { KeyValueObject } from '../../../../redux/store';
 import styles from './photo.module.scss';
 
 interface TProps {

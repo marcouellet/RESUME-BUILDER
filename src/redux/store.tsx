@@ -6,20 +6,14 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { PersistPartial } from 'redux-persist/es/persistReducer';
 
-export interface AppStore {
-    userData: {
-        [key: string]: string;
-    };
-    workExperience: {
-        [key: string]: string;
-    }[];
+export type KeyValueObject = { [key: string]: string };
+export type KeyValueObjectArray = KeyValueObject[];
 
-    education: {
-        [key: string]: string;
-    }[];
-    skills: {
-        [key: string]: string;
-    }[];
+export interface AppStore {
+    userData: KeyValueObject;
+    workExperience: KeyValueObjectArray;
+    education: KeyValueObjectArray;
+    skills: KeyValueObjectArray;
     theme: {
         color: string;
         fontFamily: string;

@@ -22,7 +22,7 @@ const Home = () => {
                 <TopNavbar itemStatus={state.itemStatus} theme={state.theme} userData={state.userData} />
 
                 <div className={styles.container}>
-                    <One />
+                    <One {...state} userData={state.userData as any} />
                 </div>
             </div>
             <Footer />
