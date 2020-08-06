@@ -118,7 +118,6 @@ const TopNavbar = (props: TProps) => {
 
     const _saveBtnPress = async () => {
         const { userData } = props;
-        const dispatch = useDispatch();
         const data = dispatch(exportUserData());
         const fileName = `CV-${userData.name}`;
         const json = JSON.stringify(data);
