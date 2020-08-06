@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
-import { appStore } from '../../redux/store';
+import { useDispatch } from 'react-redux';
 import { updateUserData, updateWorkExperienceData, updateEducationData, updateSkillData } from '../../redux/core/actions';
 
 import { Util } from '@lib';
@@ -15,7 +14,6 @@ interface TProps extends DivProps {
     value: any;
     customclass: any;
     tag: any;
-    // children: React.ReactNode
 }
 
 const defaultProps: TProps = {
@@ -28,6 +26,7 @@ const defaultProps: TProps = {
 
 const Text = (props: TProps) => {
     const [editable, setEditable] = useState(true);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (Util.editable()) {
@@ -36,10 +35,6 @@ const Text = (props: TProps) => {
         }
         setEditable(false);
     }, []);
-
-    // const _onChange = (e) => {
-    //     console.log(e);
-    // }
 
     const _onBlur = (e: any) => {
         const { statename, stateid } = props;
@@ -50,20 +45,15 @@ const Text = (props: TProps) => {
         };
 
         if (storeComponents[0] === 'userData') {
-            appStore.dispatch(updateUserData(data));
+            dispatch(updateUserData(data));
         } else if (storeComponents[0] === 'workExperience') {
-            appStore.dispatch(updateWorkExperienceData(stateid, data));
+            dispatch(updateWorkExperienceData(stateid, data));
         } else if (storeComponents[0] === 'education') {
-            appStore.dispatch(updateEducationData(stateid, data));
+            dispatch(updateEducationData(stateid, data));
         } else if (storeComponents[0] === 'skills') {
-            appStore.dispatch(updateSkillData(stateid, data));
+            dispatch(updateSkillData(stateid, data));
         }
     };
-
-    // const _findLink = (str) => {
-    //     const regex = /(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/ig
-    //     return str.replace(regex, "<a href='$1'>$1</a>");
-    // }
 
     const { value, customclass, tag } = props;
     const TagName = tag ? tag : 'p';
@@ -72,17 +62,12 @@ const Text = (props: TProps) => {
             <TagName
                 contentEditable={editable}
                 suppressContentEditableWarning="true"
-                // onInput={(e) => this._onChange(e.currentTarget.textContent)}
                 onBlur={(e: any) => _onBlur(e.currentTarget)}
                 dangerouslySetInnerHTML={{ __html: value }}
-                // className={"contentEditableContainer " + customclass}
                 className={styles.contentEditableContainer + ' ' + customclass}
                 {...(props as any)}
-                // placeholder=""
             />
         </>
-        //     {this.props.value}
-        // </p>
     );
 };
 

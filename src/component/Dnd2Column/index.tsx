@@ -75,7 +75,7 @@ interface TState {
 }
 
 const Dnd2Column = (props: TProps) => {
-    const getDerivedStateFromProps = (props: TProps) => {
+    const getDerivedStateFromProps = (props: TProps): TState => {
         const column1: KeyValueObjectArray = [];
         const column2: KeyValueObjectArray = [];
         if (props.data.length > 0) {
@@ -94,14 +94,14 @@ const Dnd2Column = (props: TProps) => {
         };
     };
 
-    const state: TState = getDerivedStateFromProps(props);
+    const state = getDerivedStateFromProps(props);
 
     const id2List: any = {
         droppable: 'column1',
         droppable2: 'column2',
     };
 
-    const getList = (id: string): KeyValueObjectArray => {
+    const getList = (id: string) => {
         return id2List[id] == 'column1' ? state['column1'] : state['column2'];
     };
 

@@ -11,7 +11,7 @@ interface TProps {
     color: string;
 }
 
-const WorkExperience = (props: TProps): JSX.Element => {
+const WorkExperience = (props: TProps) => {
     const dispatch = useDispatch();
 
     const _updateWorkExperience = (data: KeyValueObjectArray): void => {

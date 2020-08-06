@@ -12,7 +12,7 @@ interface TProps {
     data: KeyValueObjectArray;
 }
 
-const Education = (props: TProps): JSX.Element => {
+const Education = (props: TProps) => {
     const dispatch = useDispatch();
 
     const _updateEducation = (data: KeyValueObjectArray): void => {
