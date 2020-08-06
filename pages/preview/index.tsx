@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import download from 'downloadjs';
 import Head from 'next/head';
 import styles from './style.module.scss';
@@ -8,13 +8,13 @@ import { One } from '@template';
 import { Util } from '@lib';
 import { APIConfig } from '@constant';
 import Router from 'next/router';
-import { AppStore } from '../../src/redux/store';
+import { appStore } from '../../src/redux/store';
 
 import { importUserData, exportUserData } from '../../src/redux/core/actions';
 import { Loading } from '@component';
 
 const Home = () => {
-    const state = useSelector<AppStore>((state) => state) as AppStore;
+    const state = appStore.getState();
     const [exportStatus, setExportStatus] = useState<any>(false);
     const [gifGenerateStatus, setGifGenerateStatus] = useState(false);
     const dispatch = useDispatch();
