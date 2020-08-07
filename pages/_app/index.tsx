@@ -1,9 +1,8 @@
-import App from 'next/app';
 import React from 'react';
+import { Store } from 'redux';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
-import { appStore } from '../../src/redux/store';
-import withReduxStore from '../../src/lib/with-redux-store';
+import { appStore, AppStore } from '../../src/redux/store';
 import { ToastContainer } from 'react-toastify';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -21,40 +20,59 @@ import '../../src/theme/main.scss';
 
 import { Colors } from '@colors';
 
+const isServer = typeof window === 'undefined';
+
+declare global {
+    interface Window {
+        __NEXT_REDUX_STORE__: Store<AppStore>;
+    }
+}
+
 const theme = {
     colors: {
         ...Colors,
     },
 };
 
-class MyApp extends App {
-    constructor(props: any) {
-        super(props);
-        this.persistor = persistStore(props.reduxStore);
+function getOrCreateStore() {
+    // Always make a new store if server, otherwise state is shared between requests
+    if (isServer) {
+        return appStore;
     }
 
-    persistor: any;
-
-    render() {
-        const { Component, pageProps } = this.props;
-
-        return (
-            <>
-                <Head>
-                    <title>Mou inc resume | free resume builder</title>
-                    <meta name="description" content="A modern real time design and 100% free resume builder."></meta>
-                </Head>
-                <Provider store={appStore}>
-                    <PersistGate loading={<Component {...pageProps} />} persistor={this.persistor}>
-                        <ThemeProvider theme={theme}>
-                            <Component {...pageProps} />
-                        </ThemeProvider>
-                    </PersistGate>
-                </Provider>
-                <ToastContainer />
-            </>
-        );
+    // Create store if unavailable on the client and set it on the window object
+    if (!window.__NEXT_REDUX_STORE__) {
+        window.__NEXT_REDUX_STORE__ = appStore;
     }
+    return window.__NEXT_REDUX_STORE__;
 }
 
-export default withReduxStore(MyApp);
+const reduxStore = getOrCreateStore();
+
+const App = (props: any) => {
+    const { Component, pageProps } = props;
+    const persistor = persistStore(reduxStore);
+    const initialReduxState = persistor.getState();
+
+    return (
+        <>
+            <Head>
+                <title>Mou inc resume | free resume builder</title>
+                <meta name="description" content="A modern real time design and 100% free resume builder."></meta>
+            </Head>
+            <Provider store={appStore}>
+                <PersistGate
+                    loading={<Component {...pageProps} reduxStore={reduxStore} initialReduxState={initialReduxState} />}
+                    persistor={persistor}
+                >
+                    <ThemeProvider theme={theme}>
+                        <Component {...pageProps} reduxStore={reduxStore} initialReduxState={initialReduxState} />
+                    </ThemeProvider>
+                </PersistGate>
+            </Provider>
+            <ToastContainer />
+        </>
+    );
+};
+
+export default App;
