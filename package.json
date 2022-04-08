@@ -20,7 +20,7 @@
     "deep-equal": "^2.0.1",
     "downloadjs": "^1.4.7",
     "gsap": "^3.2.6",
-    "next": "^9.3.4",
+    "next": "^12.1.0",
     "prettier": "^2.0.5",
     "react": "16.13.1",
     "react-beautiful-dnd": "^13.0.0",
