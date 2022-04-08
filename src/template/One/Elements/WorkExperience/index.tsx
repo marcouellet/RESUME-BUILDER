@@ -11,7 +11,7 @@ interface TProps {
     color: string;
 }
 
-const WorkExperience = (props: TProps) => {
+const WorkExperience = (props: TProps): JSX.Element => {
     const dispatch = useDispatch();
 
     const _updateWorkExperience = (data: KeyValueObjectArray): void => {
@@ -31,10 +31,10 @@ const WorkExperience = (props: TProps) => {
     return (
         <Dnd
             data={props.data}
-            reorder={(e) => _updateWorkExperience(e)}
+            reorder={(e): void => _updateWorkExperience(e)}
             additem={_addNewItem}
-            removeitem={(id: string) => _removeItem(id, props.data)}
-            renderItem={(item: KeyValueObject) => (
+            removeitem={(id: string): void => _removeItem(id, props.data)}
+            renderItem={(item: KeyValueObject): JSX.Element => (
                 <div className={styles.workBox}>
                     <div className={styles.leftWork}>
                         <Text

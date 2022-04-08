@@ -4,7 +4,7 @@ import { WorkExperience, Education, Skills, Photo } from './Elements';
 import styles from './one.module.scss';
 import { TProps } from './one';
 
-const Template = (props: TProps) => {
+const Template = (props: TProps): JSX.Element => {
     return (
         <div className={styles.insideCon}>
             <div>

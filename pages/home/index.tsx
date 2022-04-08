@@ -5,7 +5,7 @@ import { HeaderNavbar, Footer } from '@component';
 
 import styles from './style.module.scss';
 
-const Home = () => {
+const Home = (): JSX.Element => {
     return (
         <div className={styles.homePage}>
             <HeaderNavbar />

@@ -66,7 +66,7 @@ interface TProps {
     renderItem: (item: KeyValueObject) => JSX.Element;
 }
 
-const Dnd = (props: TProps) => {
+const Dnd = (props: TProps): JSX.Element => {
     // a little function to help us with reordering the result
     const reorder = (list: KeyValueObjectArray, startIndex: number, endIndex: number): KeyValueObjectArray => {
         const result = Array.from(list);
@@ -76,7 +76,7 @@ const Dnd = (props: TProps) => {
         return result;
     };
 
-    const onDragEnd = (result: DropResult) => {
+    const onDragEnd = (result: DropResult): void => {
         // dropped outside the list
         if (!result.destination) {
             return;
@@ -92,7 +92,7 @@ const Dnd = (props: TProps) => {
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="droppable">
-                {(provided, snapshot) => (
+                {(provided, snapshot): JSX.Element => (
                     <div
                         {...provided.droppableProps}
                         ref={provided.innerRef}
@@ -101,7 +101,7 @@ const Dnd = (props: TProps) => {
                     >
                         {props.data.map((item: any, index: number) => (
                             <Draggable key={item.id} draggableId={item.id} index={index}>
-                                {(provided, snapshot) => (
+                                {(provided, snapshot): JSX.Element => (
                                     <div ref={provided.innerRef}>
                                         <div {...provided.draggableProps}>
                                             <div style={{ position: 'relative' }}>
@@ -110,7 +110,7 @@ const Dnd = (props: TProps) => {
                                                     <div
                                                         style={getAddIconStyle(snapshot.isDragging, provided.draggableProps.style)}
                                                         className={styles.dragBoxIcon}
-                                                        onClick={() => props.additem()}
+                                                        onClick={(): void => props.additem()}
                                                     >
                                                         <Tooltip title="Add New Item" arrow distance={20}>
                                                             <i className={'material-icons ' + styles.dndIcon}>add</i>
@@ -132,7 +132,7 @@ const Dnd = (props: TProps) => {
                                                         <div
                                                             style={getRemoveIconStyle(snapshot.isDragging, provided.draggableProps.style)}
                                                             className={styles.dragBoxIcon}
-                                                            onClick={() => props.removeitem(item.id)}
+                                                            onClick={(): void => props.removeitem(item.id)}
                                                         >
                                                             <Tooltip title="Remove" arrow distance={20}>
                                                                 <i className={'material-icons ' + styles.dndIcon}>remove</i>

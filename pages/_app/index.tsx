@@ -34,7 +34,7 @@ const theme = {
     },
 };
 
-function getOrCreateStore() {
+function getOrCreateStore(): Store<AppStore> {
     // Always make a new store if server, otherwise state is shared between requests
     if (isServer) {
         return appStore;
@@ -49,7 +49,7 @@ function getOrCreateStore() {
 
 const reduxStore = getOrCreateStore();
 
-const App = (props: any) => {
+const App = (props: any): JSX.Element => {
     const { Component, pageProps } = props;
     const persistor = persistStore(reduxStore);
     const initialReduxState = persistor.getState();

@@ -10,12 +10,12 @@ interface TProps {
     userData: KeyValueObject;
 }
 
-const Photo = (props: TProps) => {
+const Photo = (props: TProps): JSX.Element => {
     const [modalStatus, setModalStatus] = useState(false);
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
-    const _uploadFile = (e: any) => {
+    const _uploadFile = (e: any): void => {
         setLoading(true);
         setModalStatus(false);
         const imageFile = e.target.files[0];
@@ -36,13 +36,13 @@ const Photo = (props: TProps) => {
 
     return (
         <>
-            <div className={styles.box} onClick={() => setModalStatus(true)}>
+            <div className={styles.box} onClick={(): void => setModalStatus(true)}>
                 <img src={props.userData.photo || 'images/nobody.jpg'} alt="user photo" className={styles.image} />
             </div>
 
             <Modal
                 show={modalStatus}
-                onHide={() => setModalStatus(false)}
+                onHide={(): void => setModalStatus(false)}
                 dialogClassName="modal-90w"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -63,10 +63,10 @@ const Photo = (props: TProps) => {
                             id="uploadFile"
                             className={styles.uploadModalFileType}
                             accept="image/*"
-                            onChange={(e) => {
+                            onChange={(e): void => {
                                 _uploadFile(e);
                             }}
-                            onClick={(e: any) => {
+                            onClick={(e: any): void => {
                                 e.target.value = null;
                             }}
                         />

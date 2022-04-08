@@ -6,7 +6,7 @@ import { HeaderNavbar, Footer } from '@component';
 
 import styles from './style.module.scss';
 
-const Custom404 = () => {
+const Custom404 = (): JSX.Element => {
     return (
         <div className={styles.errPage}>
             <Head>

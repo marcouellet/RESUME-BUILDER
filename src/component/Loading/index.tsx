@@ -6,7 +6,7 @@ interface TProps {
     show: boolean;
 }
 
-const Loading = (props: TProps) => {
+const Loading = (props: TProps): JSX.Element => {
     return props.show ? (
         <div className={styles.container}>
             <div className={['verticalCenter', styles.gif].join(' ')}>

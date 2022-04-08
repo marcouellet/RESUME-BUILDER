@@ -14,10 +14,10 @@ interface TProps {
     type: string;
 }
 
-const ToastUndo = (props: TProps) => {
+const ToastUndo = (props: TProps): JSX.Element => {
     const deletedItem = props.data.filter(({ id }) => id === props.itemId);
 
-    function handleClick() {
+    function handleClick(): void {
         if (props.type === 'workExperience') {
             appStore.dispatch(addDeletedWorkExperienceItem(deletedItem));
         } else if (props.type === 'education') {

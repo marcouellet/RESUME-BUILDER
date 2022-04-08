@@ -2,7 +2,7 @@ import React from 'react';
 
 // import styles from './two.module.scss';
 
-const Template = () => {
+const Template = (): JSX.Element => {
     return (
         <>
             <div>two</div>

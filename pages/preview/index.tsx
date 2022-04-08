@@ -13,7 +13,7 @@ import { appStore } from '../../src/redux/store';
 import { importUserData, exportUserData } from '../../src/redux/core/actions';
 import { Loading } from '@component';
 
-const Home = () => {
+const Home = (): JSX.Element => {
     const state = appStore.getState();
     const [exportStatus, setExportStatus] = useState<any>(false);
     const [gifGenerateStatus, setGifGenerateStatus] = useState(false);

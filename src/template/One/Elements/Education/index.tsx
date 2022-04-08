@@ -12,7 +12,7 @@ interface TProps {
     data: KeyValueObjectArray;
 }
 
-const Education = (props: TProps) => {
+const Education = (props: TProps): JSX.Element => {
     const dispatch = useDispatch();
 
     const _updateEducation = (data: KeyValueObjectArray): void => {
@@ -32,10 +32,10 @@ const Education = (props: TProps) => {
     return (
         <Dnd
             data={props.data}
-            reorder={(data: KeyValueObjectArray) => _updateEducation(data)}
+            reorder={(data: KeyValueObjectArray): void => _updateEducation(data)}
             additem={_addNewItem}
-            removeitem={(id: string) => _removeItem(id, props.data)}
-            renderItem={(item: KeyValueObject) => (
+            removeitem={(id: string): void => _removeItem(id, props.data)}
+            renderItem={(item: KeyValueObject): JSX.Element => (
                 <div style={{ background: '#fff' }}>
                     <Text
                         value={item.title}

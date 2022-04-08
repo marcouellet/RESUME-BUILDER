@@ -24,7 +24,7 @@ const defaultProps: TProps = {
     tag: 'p',
 };
 
-const Text = (props: TProps) => {
+const Text = (props: TProps): JSX.Element => {
     const [editable, setEditable] = useState(true);
     const dispatch = useDispatch();
 
@@ -36,7 +36,7 @@ const Text = (props: TProps) => {
         setEditable(false);
     }, []);
 
-    const _onBlur = (e: any) => {
+    const _onBlur = (e: any): void => {
         const { statename, stateid } = props;
         const storeComponents = statename.split('.');
 
@@ -62,7 +62,7 @@ const Text = (props: TProps) => {
             <TagName
                 contentEditable={editable}
                 suppressContentEditableWarning="true"
-                onBlur={(e: any) => _onBlur(e.currentTarget)}
+                onBlur={(e: any): void => _onBlur(e.currentTarget)}
                 dangerouslySetInnerHTML={{ __html: value }}
                 className={styles.contentEditableContainer + ' ' + customclass}
                 {...(props as any)}

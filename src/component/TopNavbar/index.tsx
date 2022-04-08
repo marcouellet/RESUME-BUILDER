@@ -31,27 +31,27 @@ const initialState: TState = {
     gifGenerateStatus: false,
 };
 
-const TopNavbar = (props: TProps) => {
+const TopNavbar = (props: TProps): JSX.Element => {
     const [state, setState] = useState<TState>(initialState);
     const dispatch = useDispatch();
 
     const fonts: string[] = ['Source Sans Pro', 'Josefin Sans', 'Calibri', 'Cambria', 'Garamond', 'Georgia'];
 
-    const handleChangeComplete = (color: string) => {
+    const handleChangeComplete = (color: string): void => {
         const data = {
             color: color,
         };
         dispatch(updateTheme(data));
     };
 
-    const handleTypoChange = (font: string) => {
+    const handleTypoChange = (font: string): void => {
         const data = {
             fontFamily: font,
         };
         dispatch(updateTheme(data));
     };
 
-    const _colorBtnPress = () => {
+    const _colorBtnPress = (): void => {
         setState({
             ...state,
             bgComplete: !state.bgComplete,
@@ -59,7 +59,7 @@ const TopNavbar = (props: TProps) => {
         });
     };
 
-    const _sectionBtnPress = () => {
+    const _sectionBtnPress = (): void => {
         setState({
             ...state,
             bgComplete: !state.bgComplete,
@@ -67,7 +67,7 @@ const TopNavbar = (props: TProps) => {
         });
     };
 
-    const _typoBtnPress = () => {
+    const _typoBtnPress = (): void => {
         setState({
             ...state,
             bgComplete: !state.bgComplete,
@@ -75,14 +75,14 @@ const TopNavbar = (props: TProps) => {
         });
     };
 
-    const _bgPress = () => {
+    const _bgPress = (): void => {
         setState({
             ...state,
             bgComplete: false,
         });
     };
 
-    const _downloadPDFBtnPress = async () => {
+    const _downloadPDFBtnPress = async (): Promise<void> => {
         const { userData } = props;
         const data = dispatch(exportUserData());
         const fileName = `CV-${userData.name}.pdf`;
@@ -104,19 +104,19 @@ const TopNavbar = (props: TProps) => {
         download(blob, fileName);
     };
 
-    const _updateItemStatus = (name: string, status: boolean) => {
+    const _updateItemStatus = (name: string, status: boolean): void => {
         const data = {
             [name]: status,
         };
         dispatch(updateItemStatus(data));
     };
 
-    const _switchBtnClick = (name: string) => {
+    const _switchBtnClick = (name: string): void => {
         const { itemStatus } = props;
         _updateItemStatus(name, !itemStatus[name]);
     };
 
-    const _saveBtnPress = async () => {
+    const _saveBtnPress = async (): Promise<void> => {
         const { userData } = props;
         const data = dispatch(exportUserData());
         const fileName = `CV-${userData.name}`;
@@ -131,11 +131,11 @@ const TopNavbar = (props: TProps) => {
         document.body.removeChild(link);
     };
 
-    const _switchBtn = (name: string) => {
+    const _switchBtn = (name: string): JSX.Element => {
         const { itemStatus, theme } = props;
         return (
             <Switch
-                onChange={() => _updateItemStatus(name, !itemStatus[name])}
+                onChange={(): void => _updateItemStatus(name, !itemStatus[name])}
                 checked={itemStatus[name]}
                 uncheckedIcon={false}
                 checkedIcon={false}
@@ -148,7 +148,7 @@ const TopNavbar = (props: TProps) => {
         );
     };
 
-    const _colorStatusTippyContent = () => {
+    const _colorStatusTippyContent = (): JSX.Element => {
         const { theme } = props;
         return (
             <div className={styles.topNavbarCirclePicker}>
@@ -161,7 +161,7 @@ const TopNavbar = (props: TProps) => {
                                 background: item,
                                 borderColor: item,
                             }}
-                            onClick={() => handleChangeComplete(item)}
+                            onClick={(): void => handleChangeComplete(item)}
                         />
                     );
                 })}
@@ -171,14 +171,14 @@ const TopNavbar = (props: TProps) => {
                         type="text"
                         value={theme.color}
                         style={{ color: theme.color }}
-                        onChange={(e) => handleChangeComplete(e.target.value)}
+                        onChange={(e): void => handleChangeComplete(e.target.value)}
                     />
                 </div>
             </div>
         );
     };
 
-    const _typoStatusTippyContent = () => {
+    const _typoStatusTippyContent = (): JSX.Element => {
         const { theme } = props;
         return (
             <div className={styles.typoContent}>
@@ -193,7 +193,7 @@ const TopNavbar = (props: TProps) => {
                                 fontWeight: theme.fontFamily === item ? 700 : 400,
                                 fontSize: theme.fontFamily === item ? '19px' : '17px',
                             }}
-                            onClick={() => handleTypoChange(item)}
+                            onClick={(): void => handleTypoChange(item)}
                         >
                             {item}
                         </div>
@@ -203,25 +203,25 @@ const TopNavbar = (props: TProps) => {
         );
     };
 
-    const _setcionTippyContent = () => {
+    const _setcionTippyContent = (): JSX.Element => {
         return (
             <div className={styles.sectionBox}>
                 <div className={styles.sectionLeft}>
                     <div className={styles.sectionItem}>
                         {_switchBtn('picture')}
-                        <span className={styles.sectionItemText} onClick={() => _switchBtnClick('picture')}>
+                        <span className={styles.sectionItemText} onClick={(): void => _switchBtnClick('picture')}>
                             Picture
                         </span>
                     </div>
                     <div className={styles.sectionItem}>
                         {_switchBtn('info')}
-                        <span className={styles.sectionItemText} onClick={() => _switchBtnClick('info')}>
+                        <span className={styles.sectionItemText} onClick={(): void => _switchBtnClick('info')}>
                             Info
                         </span>
                     </div>
                     <div className={styles.sectionItem}>
                         {_switchBtn('profile')}
-                        <span className={styles.sectionItemText} onClick={() => _switchBtnClick('profile')}>
+                        <span className={styles.sectionItemText} onClick={(): void => _switchBtnClick('profile')}>
                             Profile
                         </span>
                     </div>
@@ -229,19 +229,19 @@ const TopNavbar = (props: TProps) => {
                 <div className={styles.sectionRight}>
                     <div className={styles.sectionItem}>
                         {_switchBtn('workExperience')}
-                        <span className={styles.sectionItemText} onClick={() => _switchBtnClick('workExperience')}>
+                        <span className={styles.sectionItemText} onClick={(): void => _switchBtnClick('workExperience')}>
                             WorkExperience
                         </span>
                     </div>
                     <div className={styles.sectionItem}>
                         {_switchBtn('education')}
-                        <span className={styles.sectionItemText} onClick={() => _switchBtnClick('education')}>
+                        <span className={styles.sectionItemText} onClick={(): void => _switchBtnClick('education')}>
                             Education
                         </span>
                     </div>
                     <div className={styles.sectionItem}>
                         {_switchBtn('skills')}
-                        <span className={styles.sectionItemText} onClick={() => _switchBtnClick('skills')}>
+                        <span className={styles.sectionItemText} onClick={(): void => _switchBtnClick('skills')}>
                             Skills
                         </span>
                     </div>
@@ -250,7 +250,7 @@ const TopNavbar = (props: TProps) => {
         );
     };
 
-    const uploadFile = async (e: any) => {
+    const uploadFile = async (e: any): Promise<void> => {
         const reg = /(.*?)\.(json)$/;
         e.preventDefault();
 
@@ -263,7 +263,7 @@ const TopNavbar = (props: TProps) => {
         }
 
         const reader = new FileReader();
-        reader.onload = async (e: any) => {
+        reader.onload = async (e: any): Promise<void> => {
             const text = e.target.result;
             importUserData(JSON.parse(text));
             setState({
@@ -271,7 +271,7 @@ const TopNavbar = (props: TProps) => {
                 loadModal: false,
             });
         };
-        reader.onerror = (error) => console.log(error);
+        reader.onerror = (error): void => console.log(error);
         reader.readAsText(e.target.files[0]);
     };
 
@@ -284,7 +284,7 @@ const TopNavbar = (props: TProps) => {
             <div className={styles.TopNavbar}>
                 <Tippy
                     visible={state.colorStatus}
-                    onClickOutside={() => setState({ ...state, colorStatus: false, bgComplete: !state.bgComplete })}
+                    onClickOutside={(): void => setState({ ...state, colorStatus: false, bgComplete: !state.bgComplete })}
                     className="customTippy colorTippy"
                     content={_colorStatusTippyContent()}
                     interactive={true}
@@ -309,7 +309,7 @@ const TopNavbar = (props: TProps) => {
 
                 <Tippy
                     visible={state.typoStatus}
-                    onClickOutside={() => setState({ ...state, typoStatus: false, bgComplete: !state.bgComplete })}
+                    onClickOutside={(): void => setState({ ...state, typoStatus: false, bgComplete: !state.bgComplete })}
                     className="customTippy typoTippy"
                     content={_typoStatusTippyContent()}
                     interactive={true}
@@ -335,7 +335,7 @@ const TopNavbar = (props: TProps) => {
 
                 <Tippy
                     visible={state.sectionStatus}
-                    onClickOutside={() => setState({ ...state, sectionStatus: false, bgComplete: !state.bgComplete })}
+                    onClickOutside={(): void => setState({ ...state, sectionStatus: false, bgComplete: !state.bgComplete })}
                     className="customTippy sectionTippy"
                     content={_setcionTippyContent()}
                     interactive={true}
@@ -357,7 +357,7 @@ const TopNavbar = (props: TProps) => {
 
                 <div
                     className={[styles.item, styles.tonNavbarBorderRight, styles.tonNavbarFelx1].join(' ')}
-                    onClick={() => setState({ ...state, saveModal: true })}
+                    onClick={(): void => setState({ ...state, saveModal: true })}
                 >
                     <div className={styles.topNavbarSave}>
                         <div className={styles.topPart}>
@@ -369,7 +369,7 @@ const TopNavbar = (props: TProps) => {
 
                 <div
                     className={[styles.item, styles.tonNavbarBorderRight, styles.tonNavbarFelx1].join(' ')}
-                    onClick={() => setState({ ...state, loadModal: true })}
+                    onClick={(): void => setState({ ...state, loadModal: true })}
                 >
                     <div className={styles.topNavbarLoad}>
                         <div className={styles.topPart}>
@@ -402,7 +402,7 @@ const TopNavbar = (props: TProps) => {
 
             <Modal
                 show={state.saveModal}
-                onHide={() => setState({ ...state, saveModal: false })}
+                onHide={(): void => setState({ ...state, saveModal: false })}
                 dialogClassName="modal-90w"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -416,7 +416,7 @@ const TopNavbar = (props: TProps) => {
 
                         <div
                             className={styles.saveModalBtn}
-                            onClick={() => {
+                            onClick={(): void => {
                                 _saveBtnPress();
                                 setState({ ...state, saveModal: false });
                             }}
@@ -429,7 +429,7 @@ const TopNavbar = (props: TProps) => {
 
             <Modal
                 show={state.loadModal}
-                onHide={() => setState({ ...state, loadModal: false })}
+                onHide={(): void => setState({ ...state, loadModal: false })}
                 dialogClassName="modal-90w"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -448,11 +448,11 @@ const TopNavbar = (props: TProps) => {
                             id="uploadFile"
                             className={styles.uploadModalFileType}
                             accept="application/JSON"
-                            onChange={(e) => {
+                            onChange={(e): void => {
                                 setState({ ...state, uploadErrMsg: false });
                                 uploadFile(e);
                             }}
-                            onClick={(e: any) => {
+                            onClick={(e: any): void => {
                                 e.target.value = null;
                             }}
                         />

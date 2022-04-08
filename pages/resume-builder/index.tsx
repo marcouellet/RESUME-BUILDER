@@ -6,7 +6,7 @@ import { One } from '@template';
 import Head from 'next/head';
 import { AppStore } from '../../src/redux/store';
 
-const Home = () => {
+const Home = (): JSX.Element => {
     const state = useSelector<AppStore>((state) => state) as AppStore;
 
     return (
